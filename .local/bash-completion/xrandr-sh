@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+___xrandr-sh_share() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      3)
+        local screen=${COMP_WORDS[1]}
+        if [[ $screen ]]; then
+            local modes=$(xrandr | command sed -e "1,/^$screen / d" \
+                -e "/connected/,$ d" \
+                -e "s/\([^[:space:]]\)[[:space:]].*/\1/")
+            COMPREPLY=( $(compgen -W "$modes" -- "$cur") )
+        fi
+      ;;
+    esac
+}
+
+___xrandr-sh_packages() {
+    find \
+        -L /home/${USER}/.local/bin/_xrandr-sh \
+        -maxdepth 1 -type f -not -name '.*' -printf '%f\n'
+}
+
+___xrandr-sh() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      1)
+        local outputs=$(xrandr | awk '/connected/ {print $1}')
+        COMPREPLY=( $(compgen -W "$outputs" -- "$cur") )
+        ;;
+      2)
+          compopt -o filenames &&
+          mapfile -t COMPREPLY < <(
+            IFS=$'\n';compgen -W "$(___xrandr-sh_packages)" -- "$cur"
+          )
+      ;;
+      *)
+        case ${COMP_WORDS[2]} in
+          above | below | left | right ) ___xrandr-sh_share ;;
+        esac
+      ;;
+    esac
+}
+
+
+complete -F ___xrandr-sh xrandr-sh

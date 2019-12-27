@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+interface="$1"
+if [ -z "$1" ]; then
+    echo "Usage: iw.show <interface>"
+    exit 1
+fi
+
+iwconfig "${interface}"

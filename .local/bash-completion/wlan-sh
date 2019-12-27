@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+___wlan-sh() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      1)
+          compopt -o filenames &&
+          mapfile -t COMPREPLY < <(
+            IFS=$'\n';compgen -W "$(___wlan-sh_commands)" -- "$cur"
+          )
+      ;;
+    esac
+}
+
+___wlan-sh_commands() {
+    find \
+        -L /home/${USER}/.local/bin/_wlan-sh \
+        -maxdepth 1 -type f -not -name '.*' -printf '%f\n'
+}
+
+complete -F ___wlan-sh wlan-sh

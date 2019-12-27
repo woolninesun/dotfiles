@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+# ssh Aliases
+alias csie.council='ssh woolninesun@council.csie.ntu.edu.tw'
+for host in linux{1..15} oasis{1..3} bsd1; do
+    os=${host%%[0-9]*}; num=$(printf "%02d" ${host##${os}})
+    alias csie.${os}${num}="ssh b04902083@${host}.csie.ntu.edu.tw"
+done; unset os num host;
+
+# lsd
+alias ls='lsd --date=relative --group-dirs=first'
+alias ll='lsd -lh --date=relative --group-dirs=first'
+alias la='lsd -lAh --date=relative --group-dirs=first'
+
+# code-insider
+alias code='code-insiders'
+
+# bash_completion
+LOCAL_COMPLETION_DIR="/home/${USER}/.local/bash-completion"
+for file in "${LOCAL_COMPLETION_DIR}/"*; do [ -s ${file} ] && \. ${file}; done
+unset LOCAL_COMPLETION_DIR
+
+# nvm
+export NVM_DIR="${HOME}/.local/node/nvm"
+[ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"
+[ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"
+
+# pyenv
+export PYENV_ROOT="$HOME/.local/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+# ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+clr_00="\[\033[01;00m\]" # white
+clr_31="\[\033[01;31m\]" # red
+clr_32="\[\033[01;32m\]" # green
+clr_33="\[\033[01;33m\]" # yellow
+clr_34="\[\033[01;34m\]" # blue
+
+_pyver_ps1_() {
+    pyenv version | awk '{ if ($1 != "system") { print "("$1")" } }'
+}
+
+new="\012"
+sym1=$'\u250C';sym2=$'\u2514' # ┌ & └
+uah="${clr_00}${sym1} ${clr_32}\u@\h ${clr_33}\t: ${clr_00}[\$?]${new}"
+inw="${clr_00}${sym2} ${clr_31}in \$(_pyver_ps1_) ${clr_34}\w${clr_31}${new}"
+cmd="${clr_00}\$ "
+export PS1="${new}${debian_chroot:+($debian_chroot)}${uah}${inw}${cmd}"
+export PS2="${cmd}"
+export PS3="${cmd}"
+export PS4="${cmd}"
+
+# Startx Automatically
+if [[ -z "${DISPLAY}" ]] && [[ $(tty) = /dev/tty1 ]]; then . startx; logout; fi
+
+# xrandr --output DP1 --mode 1920x1080 --rate 60 --brightness 0.85 --left-of eDP1

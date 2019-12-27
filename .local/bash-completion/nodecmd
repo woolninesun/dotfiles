@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+___nodecmd_lesspass() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      2)
+        COMPREPLY=( $(compgen -W "gen pack unpack" -- "$cur") )
+      ;;
+      3)
+        [[ ${COMP_WORDS[COMP_CWORD-1]} = @(gen) ]] &&
+          compopt -o filenames &&
+          mapfile -t COMPREPLY < <(
+            IFS=$'\n'; compgen -W "$(___nodecmd_lesspass_accounts)" -- "$cur"
+          )
+      ;;
+    esac
+}
+
+___nodecmd_lesspass_accounts() {
+    find \
+        -L /home/${USER}/.config/lesspass/accounts \
+        -maxdepth 1 -type f -not -name '.*' -printf '%f\n'
+}
+
+___nodecmd_packages() {
+    find \
+      -L /home/${USER}/.local/bin/_nodecmd \
+      -maxdepth 1 -type f -not -name '.*' -printf '%f\n'
+}
+
+___nodecmd() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      1)
+        compopt -o filenames &&
+        mapfile -t COMPREPLY < <(
+          IFS=$'\n'; compgen -W "$(___nodecmd_packages)" -- "$cur"
+        )
+      ;;
+      *)
+        case ${COMP_WORDS[1]} in
+          lesspass ) ___nodecmd_lesspass ;;
+        esac
+      ;;
+    esac
+}
+
+complete -F ___nodecmd nodecmd

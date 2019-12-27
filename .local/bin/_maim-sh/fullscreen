@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+screenshot_path="${HOME}/Downloads/screenshot_$(date +%Y-%m-%d_%H.%M.%S).png"
+
+maim --bordersize=1.0 ${screenshot_path}
+xclip -selection clipboard -t image/png -i "${screenshot_path}"

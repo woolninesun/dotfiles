@@ -1,0 +1,20 @@
+patch:
+  schema_list:
+    - schema: bopomofo_tw
+  menu:
+    page_size: 5
+  style:
+      horizontal: false
+  ascii_composer:
+    good_old_caps_lock: noop
+    switch_key:
+      Caps_Lock: noop
+      Shift_L: noop
+      Shift_R: commit_code
+      Control_L: noop
+      Control_R: noop
+  punctuator:
+    full_shape:
+      "/" : "/"
+    half_shape:
+      "/" : "/"

@@ -1,0 +1,7 @@
+[user]
+    email = woolninesun@gmail.com
+    name = WooLNinesun
+[color]
+    ui = true
+[core]
+    pager = less -R

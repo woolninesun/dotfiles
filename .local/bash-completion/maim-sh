@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+___maim-sh() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      1)
+          compopt -o filenames &&
+          mapfile -t COMPREPLY < <(
+            IFS=$'\n';compgen -W "$(___maim-sh_packages)" -- "$cur"
+          )
+      ;;
+    esac
+}
+
+___maim-sh_packages() {
+    find \
+        -L /home/${USER}/.local/bin/_maim-sh \
+        -maxdepth 1 -type f -not -name '.*' -printf '%f\n'
+}
+
+complete -F ___maim-sh maim-sh

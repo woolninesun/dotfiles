@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+AURURL='https://aur.archlinux.org/anydesk.git'
+PACKAGER='PACKAGER=woolninesun <woolninesun@gmail.com>'

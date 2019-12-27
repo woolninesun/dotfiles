@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+service=${1}; account=${2};
+
+if [ -z "${service}" ] || [ -z "${account}" ]; then
+	echo "Usage: $0 <service> <account>"; return
+fi
+
+function _oathcmd() {
+	while read -r line; do
+		el=( ${line} )
+
+		service_by_line=${el[0]}; account_by_line=${el[1]}
+		if [ "${service}" = "${service_by_line}" ] && \
+			[ "${account}" = "${account_by_line}" ]
+		then
+			secret=${el[2]}; digit=${el[3]}
+
+			token=$(oathtool --totp --base32 --digit ${digit} ${secret})
+			echo "${token}  $((30 - ($(date +%s) % 30)))(s)"
+			
+			return
+		fi
+	done < ~/.secret/oathcmd/secret.db
+
+	echo "Service or account not found."
+}
+
+_oathcmd

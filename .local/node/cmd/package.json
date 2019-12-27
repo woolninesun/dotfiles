@@ -1,0 +1,12 @@
+{
+  "name": "template-cmd",
+  "version": "1.0.0",
+  "description": "for use template cmd",
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "author": "WooLNinesun <woolninesun@gmail.com>",
+  "license": "MIT"
+}

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+image="${HOME}/.config/i3lock/bg.png"
+i3lock_cmd=(i3lock -i "$image" -e)
+
+text="Type password to unlock"
+
+time_param=( \
+    "--clock"                       \
+    "--timepos=ix:iy-r-120"         \
+    "--timesize=100"                \
+    "--time-font=consolas"          \
+)
+
+color_param=( \
+    "--insidecolor=00000000"        \
+    "--insidevercolor=0000001c"     \
+    "--insidewrongcolor=0000001c"   \
+    "--ringcolor=ffffff3e"          \
+    "--ringvercolor=00000000"       \
+    "--ringwrongcolor=00000055"     \
+    "--keyhlcolor=00000080"         \
+    "--verifcolor=00000000"         \
+    "--wrongcolor=ff000000"         \
+    "--linecolor=ffffff00"          \
+    "--separatorcolor=22222260"     \
+    "--bshlcolor=ff8000ff"          \
+    "--timecolor=ffffffbf"          \
+    "--datecolor=00000000"          \
+    "--layoutcolor=00000000"        \
+)
+
+# try to use i3lock with prepared parameters
+i3lock_full_cmd="${i3lock_cmd[@]} ${time_param[@]} ${color_param[@]}"
+if ! ${i3lock_full_cmd} >/dev/null 2>&1; then
+    echo "${i3lock_full_cmd}"
+    # We have failed, lets get back to stock one
+    "${i3lock_cmd[@]}"
+fi

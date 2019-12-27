@@ -1,0 +1,7 @@
+[submodule "lain"]
+	path = lain
+	url = git://github.com/lcpz/lain.git
+
+[submodule "calendar"]
+	path = calendar
+	url = git://github.com/deficient/calendar.git

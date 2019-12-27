@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+# ###################################################
+# My Generic BASH script template
+#
+version="1.0.0" # Sets version variable
+#
+# HISTORY:
+#
+# * 2019.06.14 - v1.0.0  - First Creation
+#
+# ###################################################
+
+# Provide a variable with the location of this script.
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+############ Base Script template config ############
+hasTmpDir=0
+
+source "${scriptPath}/script-utils/setup.sh"
+source "${scriptPath}/script-utils/test.sh"
+
+# Set main script
+# -----------------------------------
+function mainScript() {
+############## Begin Script Here ###################
+
+if [ -z "${1}" ]; then
+    # display usage if no parameters given
+    ext="<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "Usage: extract <path/file_name>.${ext}"
+    echo "       extract <file 1> [file 2] [file 3]"
+else
+    for n in $@; do
+    echo "====== "${n}" ======"
+    if path.isFile "${n}"; then
+        case "${n%,}" in
+            *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
+                _extractcmd tar &&
+                            tar xvf "${n}"
+                ;;
+            *.lzma)
+                _extractcmd unlzma &&
+                            unlzma ./"${n}"
+                ;;
+            *.bz2)
+                _extractcmd bunzip2 &&
+                            bunzip2 ./"${n}"
+                ;;
+            *.rar)
+                _extractcmd unrar &&
+                            unrar x -ad ./"${n}"
+                ;;
+            *.gz)
+                _extractcmd gunzip &&
+                            gunzip ./"${n}"
+                ;;
+            *.zip)
+                _extractcmd unzip &&
+                            unzip ./"${n}"
+                ;;
+            *.z)
+                _extractcmd uncompress &&
+                            uncompress ./"${n}"
+                ;;
+            *.7z |*.arj|*.cab|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.rpm|*.udf|*.wim|*.xar)
+                _extractcmd 7z &&
+                            7z x ./"${n}"
+                ;;
+            *.xz)
+                _extractcmd unxz &&
+                            unxz ./"${n}"
+                ;;
+            *.exe)
+                _extractcmd cabextract &&
+                            cabextract ./"${n}"
+                ;;
+            *)
+                echo "extract: '${n}' - unknown archive method"
+                ;;
+        esac
+    else
+        echo "'$n' - file does not exist"
+    fi
+    done; unset n;
+fi
+
+############### End Script Here ####################
+}
+
+function _extractcmd() {
+    if cmd.isExists "${1}"; then
+        return 0
+    fi
+    echo "Need ${1} command, but not found." 
+    return 1
+}
+
+# ############# ############# #############
+# ##       TIME TO RUN THE SCRIPT        ##
+# ############# ############# #############
+
+# Run your script
+mainScript ${@}

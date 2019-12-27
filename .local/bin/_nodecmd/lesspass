@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+account_dir="/home/${USER}/.config/lesspass/accounts"
+if [ ! -d ${account_dir} ]; then echo "${account_dir} diesn't exist"; exit 1; fi
+cd ${account_dir}
+
+subcmd="${1}"
+if [ -z "${subcmd}" ]; then
+    echo "Usage: $(basename "${0}") < site | pack | unpack >"; exit 1
+
+elif [ "${subcmd}" = 'pack'   ]; then
+    if [ -f "../backup.tgz.enc" ]; then rm "../backup.tgz.enc"; fi
+    tar czf - * | openssl enc -e -aes-256-cbc -out "../backup.tgz.enc"
+
+elif [ "${subcmd}" = 'unpack' ]; then
+    if [ -f "../backup.tgz.enc" ]; then
+        openssl enc -d -aes-256-cbc -in "../backup.tgz.enc" | tar xz
+    fi
+
+elif [ "${subcmd}" = 'gen' ]; then
+    user_at_site="${2}"; config_file="./${user_at_site}"; 
+    if [ ! -f "${config_file}" ]; then echo "secret file not set"; exit 1;fi
+
+    lesspass_argv=""
+    while read -r line; do argv='';
+        case "${line}" in
+            --no-digits    ) argv=" --no-digits"          ;;
+            --no-lowercase ) argv=" --no-lowercase"       ;;
+            --no-uppercase ) argv=" --no-uppercase"       ;;
+            --no-symbols   ) argv=" --no-symbols"         ;;
+            --clipboard    ) argv=" --clipboard"          ;;
+            --length\ *    ) argv=" --length  ${line#* }" ;;
+            --counter\ *   ) argv=" --counter ${line#* }" ;;
+
+            --digits|--lowercase|--uppercase|--symbols|'') continue ;;
+            * ) echo "extract: '${line}' - unknown argument!"; exit 1 ;;
+        esac
+
+        lesspass_argv="${lesspass_argv}${argv}"
+    done < "${config_file}"
+
+    dir_project="/home/${USER}/.local/node/cmd"
+    dir_nodebin='node_modules/.bin'
+
+    cmd="${dir_project}/lesspass/${dir_nodebin}/lesspass"
+
+    ${cmd} ${user_at_site} ${lesspass_argv}
+fi

@@ -1,0 +1,13 @@
+{
+  "name": "gitmoji-cmd",
+  "version": "1.0.0",
+  "description": "for use gitmoji cmd",
+  "private": true,
+  "dependencies": {
+    "gitmoji-cli": "^1.9.4"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "author": "WooLNinesun <woolninesun@gmail.com>",
+  "license": "MIT"
+}

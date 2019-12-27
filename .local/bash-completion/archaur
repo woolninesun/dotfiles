@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+___archaur() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      1)
+        COMPREPLY=( $(compgen -W "update" -- "$cur") )
+      ;;
+      2)
+        [[ ${COMP_WORDS[COMP_CWORD-1]} = @(update) ]] &&
+          compopt -o filenames &&
+          mapfile -t COMPREPLY < <(
+            IFS=$'\n';compgen -W "$(___archaur_packages)" -- "$cur"
+          )
+      ;;
+    esac
+}
+
+___archaur_packages() {
+    find \
+        -L /home/${USER}/.local/bin/_archaur \
+        -maxdepth 1 -type f -not -name '.*' -printf '%f\n'
+}
+
+complete -F ___archaur archaur

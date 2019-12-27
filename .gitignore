@@ -1,0 +1,95 @@
+*
+!.bashrc
+!.bash_aliases
+!.bash_profile
+!.bash_host
+!.bash_host/**
+!.bash_logout
+!.vimrc
+!.inputrc
+!.npmrc
+!.dircolors
+
+# https://github.com/gpakosz/.tmux
+!.tmux.conf.local
+
+!.gitconfig
+!.gitignore
+
+!.xinitrc
+!.Xresources
+!.xorg.conf.new
+
+!.ssh
+!.ssh/config
+!.ssh/config.d
+!.ssh/config.d/*
+
+!.local
+!.local/bash-completion
+!.local/bash-completion/**
+!.local/bin
+!.local/bin/**
+.local/bin/phantomjs
+.local/bin/git-sizer
+!.local/node
+!.local/node/cmd
+!.local/node/cmd/**
+.local/node/cmd/**/node_modules
+.local/node/cmd/**/package-lock.json
+
+!.vscode/vscode_extension.txt
+
+!.config
+# https://awesomewm.org/
+!.config/awesome
+!.config/awesome/**
+# https://code.visualstudio.com/
+!.config/Code
+!.config/Code/User
+!.config/Code/User/snippets
+!.config/Code/User/snippets/**
+!.config/Code/User/keybindings.json
+!.config/Code/User/locale.json
+!.config/Code/User/settings.json
+# https://www.freedesktop.org/wiki/Software/fontconfig/
+!.config/fontconfig
+!.config/fontconfig/fonts.conf
+# https://git-scm.com/
+!.config/git
+!.config/git/**
+# https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx
+!.config/fcitx
+# https://rime.im/
+!.config/fcitx/rime
+!.config/fcitx/rime/default.custom.yaml
+# https://hisham.hm/htop/
+!.config/htop
+!.config/htop/htoprc
+# https://i3wm.org/i3lock/
+!.config/i3lock
+!.config/i3lock/**
+!.config/lesspass
+!.config/lesspass/backup.tgz.enc
+!.config/lesspass/accounts
+!.config/lesspass/accounts/.gitkeep
+# https://github.com/dylanaraps/neofetch
+!.config/neofetch
+!.config/neofetch/config.conf
+# https://openvpn.net/
+!.config/openvpn
+!.config/openvpn/**
+# https://github.com/davatorium/rofi
+!.config/rofi
+!.config/rofi/**
+!.config/systemd
+!.config/systemd/**
+.config/systemd/user/default.target.wants
+!.config/telegram
+!.config/telegram/**
+# https://code.launchpad.net/~gnome-terminator/terminator/manual-gtk3
+!.config/terminator
+!.config/terminator/config
+!.config/chromium-flags.conf
+# https://github.com/chjj/compton
+!.config/compton.conf

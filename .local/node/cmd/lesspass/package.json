@@ -1,0 +1,14 @@
+{
+  "name": "lesspass-cmd",
+  "version": "1.0.0",
+  "description": "for use lesspass cmd",
+  "private": true,
+  "dependencies": {
+    "lesspass": "^6.0.0",
+    "lesspass-cli": "^5.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "author": "WooLNinesun <woolninesun@gmail.com>",
+  "license": "MIT"
+}

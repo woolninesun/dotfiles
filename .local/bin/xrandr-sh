@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# ###################################################
+# My Generic BASH script template
+#
+version="1.0.0" # Sets version variable
+#
+# HISTORY:
+#
+# * 2019.07.15 - v1.0.0  - First Creation
+#
+# ###################################################
+
+# Provide a variable with the location of this script.
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+############ Base Script template config ############
+hasTmpDir=0
+
+source "${scriptPath}/script-utils/setup.sh"
+source "${scriptPath}/script-utils/test.sh"
+
+# Set main script
+# -----------------------------------
+function mainScript() {
+############## Begin Script Here ###################
+
+screen="${1}" && cmd="${2}"
+if str.isNotEmpty "${cmd}"; then
+  excuteScript="${scriptPath}/_xrandr-sh/${cmd}"
+  if path.isExists "${excuteScript}" && path.isExecutable "${excuteScript}"; then
+    ${excuteScript} ${@}
+  else
+    echo "${1} : unknow action."
+    exit 1
+  fi
+fi
+
+############### End Script Here ####################
+}
+
+# ############# ############# #############
+# ##       TIME TO RUN THE SCRIPT        ##
+# ############# ############# #############
+
+# Run your script
+mainScript ${@}

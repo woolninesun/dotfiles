@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+dir_project="/home/${USER}/.local/node/cmd"
+dir_nodebin='node_modules/.bin'
+
+cmd="${dir_project}/gitmoji/${dir_nodebin}/gitmoji"
+
+${cmd} ${@}

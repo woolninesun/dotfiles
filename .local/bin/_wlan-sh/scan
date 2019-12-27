@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+interface="${1}"
+if [ -z "${1}" ]; then
+    echo "Usage: wlan-sh scan <interface>"
+    exit 1
+fi
+
+# iwlist output parsing
+awk_parser='
+BEGIN { FS=":"; OFS="="; }
+/ \<Cell/ {
+    if (essid) {
+	    print essid, channel, frequency, security, quality[2]/quality[3]*100, dBm[1];
+    }
+    security="none"
+}
+/ \<Channel/ {
+    channel=$2;
+}
+/ \<Frequency/ {
+    frequency=$2;
+}
+/ \<ESSID/ { 
+    essid=substr($2, 2, length($2) - 2);
+}
+/ \<Quality/ {
+    split($1,         quality, "[=/]");
+    split(quality[4], dBm,     " "   );
+}
+/ \<IE:.*WPA.*/ {
+    security="wpa";
+}
+/ \<Encryption key:on/ {
+    if(!security) security="wep";
+}
+END {
+    if (essid) {
+        print essid, channel, frequency, security, quality[2]/quality[3]*100, dBm[1];
+    }
+}
+'
+
+fail () {
+    echo "$1"
+    exit 0
+}
+
+printing () {
+    printf "%-30s%-25s%-9s%-7s%-5s\n" \
+        'ESSID' 'frequency' 'security' 'signal' 'dBm'
+
+    local IFS='='
+    while read essid channel frequency security signal dBm; do
+	    found_one="yep"
+
+        channel="(ch. $(printf "%3s\n" $channel))"
+	    printf "%-30s%-13s%-12s%9s%7s%-5s\n" \
+            $essid ${frequency%% (*} $channel "$security " "${signal/.*/}% " ${dBm}
+    done
+    if [ -z "$found_one" ]; then
+	    echo "Sorry, I don't get anything, this place somewhat lacks datalove…"
+    fi
+}
+
+[ $(id -u) -ne 0 ] && fail "Hey, get off, this should only be run by root."
+
+iwlist $interface scan 2>/dev/null | awk "$awk_parser" | sort -t= -nk4 | printing

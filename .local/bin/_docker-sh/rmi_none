@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+none_images=$(docker images -f "dangling=true" -q)
+if [ -n "${none_images}" ]; then
+    docker rmi ${none_images}
+else
+    echo 'No images is dangling(<none>).'
+fi
+# 
