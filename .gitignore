@@ -25,11 +25,13 @@
 !.ssh/config.d
 !.ssh/config.d/config.git
 !.ssh/config.d/config.ntu.csie
-!.ssh/permission.sh
+!.ssh/setup.sh
 
 !.local
 !.local/bash-completion
 !.local/bash-completion/**
+.local/bash-completion/node
+.local/bash-completion/npm
 !.local/bin
 !.local/bin/**
 .local/bin/phantomjs
@@ -39,6 +41,7 @@
 !.local/node/cmd/**
 .local/node/cmd/**/node_modules
 .local/node/cmd/**/package-lock.json
+!.local/setup.sh
 
 !.vscode
 !.vscode/settings.json
