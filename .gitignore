@@ -23,7 +23,9 @@
 !.ssh
 !.ssh/config
 !.ssh/config.d
-!.ssh/config.d/*
+!.ssh/config.d/config.git
+!.ssh/config.d/config.ntu.csie
+!.ssh/permission.sh
 
 !.local
 !.local/bash-completion
@@ -38,6 +40,8 @@
 .local/node/cmd/**/node_modules
 .local/node/cmd/**/package-lock.json
 
+!.vscode
+!.vscode/settings.json
 !.vscode/vscode_extension.txt
 
 !.config
@@ -85,6 +89,8 @@
 !.config/systemd
 !.config/systemd/**
 .config/systemd/user/default.target.wants
+!.config/TabNine
+!.config/TabNine/**
 !.config/telegram
 !.config/telegram/**
 # https://code.launchpad.net/~gnome-terminator/terminator/manual-gtk3

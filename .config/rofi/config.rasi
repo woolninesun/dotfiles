@@ -1,5 +1,5 @@
 configuration {
-	modi: "calc,run,drun,net:.config/rofi/netctl_switch.sh";
+	modi: "run,drun,workspace:~/.config/rofi/scripts/workspace.sh";
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/

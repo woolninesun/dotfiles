@@ -39,7 +39,7 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 fcitx &
 
-compton --config .config/compton.conf &
+compton -b --config .config/compton.conf &
 
 
 xinput --set-prop 17 'libinput Accel Speed' 0.7

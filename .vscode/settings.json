@@ -1,0 +1,30 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+
+        "Documents": true,
+        "Downloads": true,
+        "GameLib": true,
+        "kernelvm": true,
+        "minecraft": true,
+        "Projects": true,
+
+        ".cache": true,
+        ".steam": true,
+        ".steampid": true,
+        ".oracle_jre_usage": true,
+        ".gitmoji": true,
+        ".mozilla": true,
+        ".node": true,
+        ".pki": true,
+        ".gnupg": true,
+        ".pulse-cookie": true,
+        ".esd_auth": true,
+        ".Xauthority": true
+    }
+}

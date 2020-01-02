@@ -1,7 +1,6 @@
 -- Net
 local lain  = require("lain")
 local wibox = require("wibox")
-local naughty = require("naughty")
 
 local theme = require("themes.custom.config")
 

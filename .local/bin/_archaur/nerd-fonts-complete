@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-AURURL='https://aur.archlinux.org/nerd-fonts-complete.git'
-PACKAGER='PACKAGER=woolninesun <woolninesun@gmail.com>'

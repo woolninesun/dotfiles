@@ -139,11 +139,11 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(my_table.join(
-    -- awful.button({ }, 3, function () end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
+-- root.buttons(my_table.join(
+--     awful.button({ }, 3, function () end),
+--     awful.button({ }, 4, awful.tag.viewnext),
+--     awful.button({ }, 5, awful.tag.viewprev)
+-- ))
 -- }}}
 
 -- {{{ Key bindings
@@ -245,15 +245,15 @@ globalkeys = my_table.join(
               {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                      client.focus = c
-                      c:raise()
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
+        function ()
+            local c = awful.client.restore()
+            -- Focus restored client
+            if c then
+                client.focus = c
+                c:raise()
+            end
+        end,
+        {description = "restore minimized", group = "client"}),
 
     -- Brightness
     awful.key({ }, "XF86MonBrightnessUp",
@@ -262,6 +262,12 @@ globalkeys = my_table.join(
     awful.key({ }, "XF86MonBrightnessDown",
         function () awful.util.spawn("xbacklight -dec 10") end,
         {description = "-10%", group = "hotkeys"}),
+    
+    -- maim
+    awful.key({ }, "Print",
+        function ()
+            os.execute("bash ~/.config/rofi/scripts/maimmenu.sh")
+        end),
 
     -- User programs
     awful.key({ modkey }, "Return",

@@ -6,11 +6,11 @@ local naughty = require("naughty")
 local theme = require("themes.custom.config")
 
 local eth0 = lain.widget.net({
-    iface = {"enp0s20f0u2"},
+    iface = {"enx9cebe821b111"},
     eth_state = "on",
     notify = "off",
     settings = function()
-        local eth0 = net_now.devices["enp0s20f0u2"]
+        local eth0 = net_now.devices["enx9cebe821b111"]
         local fontColor = "gray"
         local displayString = " Null "
 

@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-AURURL='https://aur.archlinux.org/visual-studio-code-bin.git'
-PACKAGER='PACKAGER=woolninesun <woolninesun@gmail.com>'
