@@ -2,7 +2,7 @@ patch:
   schema_list:
     - schema: bopomofo_tw
   menu:
-    page_size: 5
+    page_size: 10
   style:
       horizontal: false
   ascii_composer:

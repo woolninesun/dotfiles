@@ -68,6 +68,9 @@
 !.config/git/**
 # https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx
 !.config/fcitx
+!.config/fcitx/conf
+!.config/fcitx/config
+!.config/fcitx/conf/**
 # https://rime.im/
 !.config/fcitx/rime
 !.config/fcitx/rime/default.custom.yaml
