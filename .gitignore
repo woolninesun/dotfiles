@@ -1,7 +1,8 @@
 *
 !.bashrc
-!.bash_aliases
+!.profile
 !.bash_profile
+!.bash_aliases
 !.bash_host
 !.bash_host/**
 !.bash_logout
