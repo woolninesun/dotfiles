@@ -35,7 +35,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # ssh-agent
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+if [[ -z "${SSH_AUTH_SOCK}" ]]; then
+    export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+fi
 
 clr_00="\[\033[01;00m\]" # white
 clr_31="\[\033[01;31m\]" # red

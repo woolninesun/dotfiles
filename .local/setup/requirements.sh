@@ -112,3 +112,8 @@ sudo apt install firmware-atheros
 #         Driver "libinput"
 #         Option "Tapping" "on"
 # EndSection
+
+#
+# ssh-agent
+systemctl --user enable ssh-agent
+systemctl --user start ssh-agent
