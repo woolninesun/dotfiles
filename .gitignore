@@ -25,7 +25,6 @@
 !.ssh/config.d
 !.ssh/config.d/config.git
 !.ssh/config.d/config.ntu.csie
-!.ssh/setup.sh
 
 !.local
 !.local/bash-completion
@@ -41,7 +40,8 @@
 !.local/node/cmd/**
 .local/node/cmd/**/node_modules
 .local/node/cmd/**/package-lock.json
-!.local/setup.sh
+!.local/setup
+!.local/setup/**
 
 !.vscode
 !.vscode/settings.json

@@ -2,7 +2,7 @@
 
 # Provide a variable with the location of this script.
 scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "${scriptPath}/bin/script-utils/test.sh"
+source "${scriptPath}/../bin/script-utils/test.sh"
 
 #
 # bash-completion ##
@@ -15,5 +15,5 @@ fi
 
 #
 # permission ##
-chmod -R 644 ./bash-completion/*
-chmod -R 755 ./bin/*
+chmod -R 644 ${HOME}/.local/bash-completion
+chmod -R 755 ${HOME}/.local/bin
