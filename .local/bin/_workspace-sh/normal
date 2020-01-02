@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Provide a variable with the location of this script.
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${scriptPath}/../script-utils/test.sh"
+
+xrandr --output DP1  --off

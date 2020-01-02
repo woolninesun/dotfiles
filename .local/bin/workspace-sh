@@ -7,7 +7,7 @@ version="1.0.0" # Sets version variable
 #
 # HISTORY:
 #
-# * 2019.12.29 - v1.0.0  - First Creation
+# * 2019.01.02 - v1.0.0  - First Creation
 #
 # ###################################################
 
@@ -30,7 +30,7 @@ if str.isNotEmpty "${cmd}"; then
   excuteScript="${scriptPath}/_workspace-sh/${cmd}"
 
   if path.isExists "${excuteScript}" && path.isExecutable "${excuteScript}"; then
-    bahs ${excuteScript}
+    ${excuteScript}
   fi
 fi
 

@@ -1,5 +1,28 @@
 #!/usr/bin/env bash
 
+# Provide a variable with the location of this script.
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${scriptPath}/../script-utils/test.sh"
+
+screenDP1=$(                      \
+  xrandr                          \
+  | awk '/ connected/ {print $1}' \
+  | grep ^DP1$                    \
+)
+if str.isEmpty "${screenDP1}"; then
+  exit 1;
+fi
+
+mode1920x1080=$(                              \
+  xrandr                                      \
+  | sed -e "1,/^DP1 / d" -e "/connected/,$ d" \
+  | awk '{print $1}'                          \
+  | grep ^1920x1080$                          \
+)
+if str.isEmpty "${mode1920x1080}"; then
+  exit 1;
+fi
+
 xrandr  --output eDP1 --primary       \
         --output DP1  --above eDP1    \
         --mode        1920x1080       \
