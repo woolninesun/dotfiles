@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 
+# Provide a variable with the location of this script.
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # maim options
 maim_command="maim --bordersize=1.0"
 screenshot_path="${HOME}/Downloads/screenshot_$(date +%Y-%m-%d_%H%M%S).png"
 
 ### Options ###
-screen="screen"
-area="area"
-window="window"
-delay10="delay 10"
+screen=""
+area=""
+window=""
+delay10=""
 
 # rofi options
-rofi_command="rofi"
+rofi_command="rofi -config ${scriptPath}/config.rasi -theme ${scriptPath}/theme.rasi"
 options=(           \
     "${area}\n"     \
     "${screen}\n"   \

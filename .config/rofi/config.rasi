@@ -1,5 +1,5 @@
 configuration {
-	modi: "run,drun,workspace:~/.config/rofi/scripts/workspace.sh";
+	modi: "drun,workspace:~/.config/rofi/workspace/main.sh";
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/

@@ -1,0 +1,40 @@
+* {
+  font:                                 "FuraMono Nerd Font 14";
+  option-element-padding:               80px  110px 80px  75px;
+  option-3-window-padding:              11px;
+  option-3-listview-spacing:            10px;
+
+  accent:           #002b36;
+  background:       #fdf6e3;
+  background-light: #eee8d5;
+  foreground:       #002b36;
+}
+
+* {
+  background-color: @background;
+  text-color: @foreground;
+  font: @font;
+}
+
+#window {
+  padding: @option-3-window-padding;
+  children: [ horibox ];
+}
+
+#listview {
+  spacing: @option-3-listview-spacing;
+  layout: horizontal;
+}
+
+#horibox {
+  children: [ listview ];
+}
+
+#element {
+  padding: @option-element-padding;
+}
+
+#element.selected {
+  background-color: @accent;
+  text-color: @background;
+}

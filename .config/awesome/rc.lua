@@ -266,7 +266,7 @@ globalkeys = my_table.join(
     -- maim
     awful.key({ }, "Print",
         function ()
-            os.execute("bash ~/.config/rofi/scripts/maimmenu.sh")
+            os.execute("bash ~/.config/rofi/maimmenu/main.sh")
         end),
 
     -- User programs
