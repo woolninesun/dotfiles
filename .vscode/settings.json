@@ -9,9 +9,8 @@
 
         "Documents": true,
         "Downloads": true,
-        "GameLib": true,
-        "kernelvm": true,
-        "minecraft": true,
+        "GameLibs": true,
+        "KernelVM": true,
         "Projects": true,
 
         ".cache": true,
