@@ -84,6 +84,8 @@
 !.config/lesspass/backup.tgz.enc
 !.config/lesspass/accounts
 !.config/lesspass/accounts/.gitkeep
+!.config/nautilus
+!.config/nautilus/**
 # https://github.com/dylanaraps/neofetch
 !.config/neofetch
 !.config/neofetch/config.conf
