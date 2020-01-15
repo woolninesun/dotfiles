@@ -41,9 +41,13 @@ git clone ${AWESOME_LAIN_GIT} ${CONFIG_PATH}/awesome/lain
 git clone ${AWESOME_CALENDAR_GIT} ${CONFIG_PATH}/awesome/calendar
 
 #
-# pyenv && nvm ##
+# pyenv ##
 git clone ${PYENV_GIT} ${LOCAL_PATH}/pyenv
 git clone ${PYENV_VIRTUALENV_GIT} ${LOCAL_PATH}/pyenv/plugins/pyenv-virtualenv
+sudo apt install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+#
+#  nvm ##
 git clone ${NVM_GIT} ${LOCAL_PATH}/node/nvm
 
 #
@@ -60,6 +64,16 @@ sudo usermod -aG docker ${USER}
 sudo apt install qemu-kvm libvirt-clients libvirt-daemon-system
 sudo usermod -aG libvirt ${USER}
 
+#
+# install network manager ##
+sudo apt install network-manager
+sudo apt install network-manager-openvpn
+sudo apt install network-manager-openvpn-gnome
+# sudo vim /etc/apt/sources.list add "contrib non-free"
+sudo apt install firmware-atheros
+
+# 
+# install some packages ##
 sudo apt install pavucontrol
 sudo apt install fcitx fcitx-rime
 sudo apt install rofi
@@ -72,12 +86,9 @@ sudo apt install telegram-desktop
 sudo apt install tree
 sudo apt install tmux
 sudo apt install htop
-
-#
-# install network manager ##
-sudo apt install network-manager
-# sudo vim /etc/apt/sources.list add "contrib non-free"
-sudo apt install firmware-atheros
+sudo apt install neofetch
+sudo apt install rsync
+sudo apt install hwinfo 
 
 # 
 # install lsd ##
