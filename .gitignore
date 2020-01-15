@@ -89,7 +89,7 @@
 !.config/neofetch/config.conf
 # https://openvpn.net/
 !.config/openvpn
-!.config/openvpn/**
+!.config/openvpn/.gitkeep
 # https://github.com/davatorium/rofi
 !.config/rofi
 !.config/rofi/**
