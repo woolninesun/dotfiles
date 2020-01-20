@@ -4,28 +4,25 @@
 scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "${scriptPath}/../script-utils/test.sh"
 
-screenDP1=$(                      \
-  xrandr                          \
-  | awk '/ connected/ {print $1}' \
-  | grep ^DP1$                    \
-)
-if str.isEmpty "${screenDP1}"; then
+#######################################################################
+
+source "./utils.sh"
+
+MainScreenName="eDP1"
+Mode="1920x1080"
+
+SameAsScreen="DP1"
+
+#######################################################################
+
+if ! screen.check ${SameAsScreen} ${Mode}; then
   exit 1;
 fi
 
-mode1920x1080=$(                              \
-  xrandr                                      \
-  | sed -e "1,/^DP1 / d" -e "/connected/,$ d" \
-  | awk '{print $1}'                          \
-  | grep ^1920x1080$                          \
-)
-if str.isEmpty "${mode1920x1080}"; then
-  exit 1;
-fi
-
-xrandr  --output eDP1 --primary       \
-        --output DP1  --same-as eDP1  \
-        --mode        1920x1080       \
-        --dpi         96              \
-        --rate        60.00           \
-        --rotate      normal
+xrandr  --output ${MainScreenName} --primary                  \
+        --output ${SameAsScreen} --same-as ${MainScreenName}  \
+        --mode        ${Mode}                                 \
+        --dpi         96                                      \
+        --rate        60.00                                   \
+        --rotate      normal                                  \
+        ${@}
