@@ -195,14 +195,12 @@ globalkeys = my_table.join(
 
     -- Show/Hide Wibox
     awful.key({ modkey }, "b", function ()
-            for s in screen do
-                s.mywibox.visible = not s.mywibox.visible
-                if s.mybottomwibox then
-                    s.mybottomwibox.visible = not s.mybottomwibox.visible
-                end
+            currentScreen = awful.screen.focused()
+            if currentScreen.mywibox then
+                currentScreen.mywibox.visible = not currentScreen.mywibox.visible
             end
         end,
-        {description = "toggle wibox", group = "awesome"}),
+        {description = "toggle focus screen wibox", group = "awesome"}),
 
     -- Dynamic tagging
     awful.key({ modkey, "Shift" }, "n", function ()
