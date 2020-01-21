@@ -11,17 +11,19 @@ source "${scriptPath}/variables.sh"
 
 Mode="1920x1080"
 
-SameAsScreen="${SubScreenName0100}"
+AboveScreen="${SubScreenName0202}"
 
 #######################################################################
 
-if ! screen.check ${SameAsScreen} ${Mode}; then
+if ! screen.check ${AboveScreen} ${Mode}; then
   exit 1;
 fi
 
 xrandr  --output ${MainScreenName} --primary  \
         ${SubScreenOffArgument[@]}            \
-        --output ${SameAsScreen} --same-as ${MainScreenName}  \
-        --mode        ${Mode}                                 \
-        --rotate      normal                                  \
+        --output ${AboveScreen} --above ${MainScreenName} \
+        --mode        ${Mode}                             \
+        --rotate      normal                              \
         ${@}
+
+nmcli connection up ZeroDegree

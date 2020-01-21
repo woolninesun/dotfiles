@@ -6,13 +6,13 @@ source "${scriptPath}/../script-utils/test.sh"
 
 #######################################################################
 
-source "./utils.sh"
+source "${scriptPath}/utils.sh"
+source "${scriptPath}/variables.sh"
 
-MainScreenName="eDP1"
 Mode="1920x1080"
 
-AboveScreen="DP2-2"
-RightOfScreen="DP1-1"
+AboveScreen="${SubScreenName0201}"
+RightOfScreen="${SubScreenName0102}"
 
 #######################################################################
 
@@ -24,15 +24,14 @@ if ! screen.check ${RightOfScreen} ${Mode}; then
   exit 1;
 fi
 
-xrandr  --output ${MainScreenName} --primary                \
-        --output ${RightOfScreen} --above ${MainScreenName} \
+xrandr  --output ${MainScreenName} --primary  \
+        ${SubScreenOffArgument[@]}            \
+        --output ${AboveScreen} --above ${MainScreenName}   \
         --mode        ${Mode}                               \
-        --dpi         96                                    \
-        --rate        60.00                                 \
         --rotate      normal                                \
-        --output ${AboveScreen} --right-of ${RightOfScreen} \
+        --output ${RightOfScreen} --right-of ${AboveScreen} \
         --mode        ${Mode}                               \
-        --dpi         96                                    \
-        --rate        60.00                                 \
         --rotate      left                                  \
         ${@}
+
+nmcli connection up ZeroDegree
