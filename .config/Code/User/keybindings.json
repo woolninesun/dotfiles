@@ -199,5 +199,14 @@
     {
         "key": "ctrl+shift+d",
         "command": "-workbench.view.debug"
+    },
+    {
+        "key": "shift+alt+r",
+        "command": "sshHosts.focus"
+    },
+    {
+        "key": "shift+alt+r",
+        "command": "-remote-wsl.revealInExplorer",
+        "when": "false"
     }
 ]

@@ -45,7 +45,6 @@
     "markdown-preview-enhanced.enableWikiLinkSyntax": false,
     "markdown-preview-enhanced.liveUpdate": false,
     "markdown-preview-enhanced.scrollSync": true,
-    "C_Cpp.clang_format_path": "/home/woolninesun/.node/cmd/clang-format/node_modules/.bin/clang-format",
     "liveshare.accountProvider": "github",
     "liveshare.autoShareServers": false,
     "liveshare.autoShareTerminals": false,
@@ -59,7 +58,6 @@
     "editor.wordWrap": "wordWrapColumn",
     "java.configuration.checkProjectSettingsExclusions": false,
     "java.dependency.autoRefresh": false,
-    "search.location": "panel",
     "git.confirmSync": false,
     "editor.glyphMargin": false,
     "java.errors.incompleteClasspath.severity": "ignore",
@@ -67,5 +65,10 @@
     "diffEditor.renderSideBySide": true,
     "explorer.compactFolders": false,
     "git.autofetch": true,
-    "window.zoomLevel": 0
+    "terminal.external.linuxExec": "terminator",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "tabnine.experimentalAutoImports": true,
+    "java.semanticHighlighting.enabled": false,
+    "java.requirements.JDK11Warning": false,
+    "window.zoomLevel": 0,
 }
