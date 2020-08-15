@@ -26,13 +26,15 @@ source "${scriptPath}/script-utils/test.sh"
 function mainScript() {
 ############## Begin Script Here ###################
 
-cmd="${1}"
+cmd="${1}"; shift;
 if str.isNotEmpty "${cmd}"; then
   excuteScript="${scriptPath}/_docker-sh/${cmd}"
 
   if path.isExists "${excuteScript}" && path.isExecutable "${excuteScript}"; then
     case "${cmd}" in
       ps | rmi_none ) ${excuteScript}
+        ;;
+      shell ) ${excuteScript} ${@}
         ;;
       * ) echo "${cmd} : unknow action." ;;
     esac

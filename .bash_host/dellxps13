@@ -45,16 +45,62 @@ clr_32="\[\033[01;32m\]" # green
 clr_33="\[\033[01;33m\]" # yellow
 clr_34="\[\033[01;34m\]" # blue
 
-_pyver_ps1_() {
+__ps1_pyenv() {
     pyenv version | awk '{ if ($1 != "system") { print "("$1")" } }'
 }
 
-new="\012"
-sym1=$'\u250C';sym2=$'\u2514' # ┌ & └
-uah="${clr_00}${sym1} ${clr_32}\u@\h ${clr_33}\t: ${clr_00}[\$?]${new}"
-inw="${clr_00}${sym2} ${clr_31}in \$(_pyver_ps1_) ${clr_34}\w${clr_31}${new}"
+__ps1_nvm() {
+    nvm version | awk '{ if ($1 != "system") { print "("$1")" } }'
+}
+
+__ps1_git_branch() {
+    local icon=$'\u2387 '; # space for this icon will replace on char behind it
+    local symbolic='';
+	local branch='';
+
+	# Check if the current directory is in a Git repository.
+	git rev-parse --is-inside-work-tree &>/dev/null || return;
+
+	# Check for what branch we’re on.
+	# Get the short symbolic ref. If HEAD isn’t a symbolic ref, get a
+	# tracking remote branch or tag. Otherwise, get the
+	# short SHA for the latest commit, or give up.
+	branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+		git describe --all --exact-match HEAD 2> /dev/null || \
+		git rev-parse --short HEAD 2> /dev/null || \
+		echo '(unknown)')";
+
+    # Check for uncommitted changes in the index.
+    if ! $(git diff --quiet --ignore-submodules --cached); then
+        symbolic+='+';
+    fi;
+    # Check for unstaged changes.
+    if ! $(git diff-files --quiet --ignore-submodules --); then
+        symbolic+='!';
+    fi;
+    # Check for untracked files.
+    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        symbolic+='?';
+    fi;
+
+	[ -n "${symbolic}" ] && symbolic="${symbolic}";
+
+    echo -e "${icon} ${branch} [${symbolic}]"
+}
+
+__ps1_env() {
+    echo -e "\$(__ps1_pyver)"
+}
+
+new="\012" # line break
+sym1=$'\u250C'; sym2=$'\u2514'; # ┌ & └
+
+uah="${clr_00}${sym1} ${clr_32}\u@\h ${clr_33}\t"
+uah="${uah} ${clr_31}\$(__ps1_pyenv) \$(__ps1_nvm)${new}"
+inw="${clr_00}${sym2} ${clr_31}in ${clr_34}\w${clr_31} \$(__ps1_git_branch)${new}"
+
 cmd="${clr_00}\$ "
-export PS1="${new}${debian_chroot:+($debian_chroot)}${uah}${inw}${cmd}"
+export PS1="${new}${uah}${inw}${env}${cmd}"
 export PS2="${cmd}"
 export PS3="${cmd}"
 export PS4="${cmd}"

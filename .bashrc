@@ -68,7 +68,7 @@ if [ "$color_prompt" = yes ]; then
     inw="${clr_00}${sym2} ${clr_31}in ${clr_34}\w${clr_31}${new}"
     cmd="${clr_00}\$ "
 else
-    uah="${sym1} \u@\h \t: [\$?]${new}"
+    uah="${sym1} \u@\h \t"
     inw="${sym2} in \w${new}"
     cmd="\$ "
 fi
