@@ -39,7 +39,7 @@ local chosen_theme = "custom"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "terminator"
-local browser      = "chromium"
+local browser      = "google-chrome"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "◉", "◉", "◉" }
@@ -447,6 +447,7 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c, {size = 24}) : setup {  -- change for title bar?
         { -- Left
+            awful.titlebar.widget.iconwidget    (c),
 			awful.titlebar.widget.closebutton	(c),
             layout  = wibox.layout.fixed.horizontal
         },

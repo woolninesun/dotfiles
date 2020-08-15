@@ -31,13 +31,13 @@ volume.widget:buttons( my_table.join (
     end),
     awful.button({}, 4, function()
         os.execute(
-            string.format("%s set %s 1%%+", volume.cmd, volume.channel)
+            string.format("%s set %s 5%%+", volume.cmd, volume.channel)
         )
         volume.update()
     end),
     awful.button({}, 5, function()
         os.execute(
-            string.format("%s set %s 1%%-", volume.cmd, volume.channel)
+            string.format("%s set %s 5%%-", volume.cmd, volume.channel)
         )
         volume.update()
     end)
