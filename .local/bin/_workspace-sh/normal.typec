@@ -11,7 +11,7 @@ source "${scriptPath}/variables.sh"
 
 Mode="1920x1080"
 
-AboveScreen="${SubScreenName0201}"
+AboveScreen="${SubScreenName0100}"
 
 #######################################################################
 

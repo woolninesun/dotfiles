@@ -83,9 +83,9 @@ __ps1_git_branch() {
         symbolic+='?';
     fi;
 
-	[ -n "${symbolic}" ] && symbolic="${symbolic}";
+	[ -n "${symbolic}" ] && symbolic="[${symbolic}]";
 
-    echo -e "${icon} ${branch} [${symbolic}]"
+    echo -e "${icon} ${branch} ${symbolic}"
 }
 
 __ps1_env() {

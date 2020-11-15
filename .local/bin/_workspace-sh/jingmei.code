@@ -33,5 +33,3 @@ xrandr  --output ${MainScreenName} --primary  \
         --mode        ${Mode}                               \
         --rotate      left                                  \
         ${@}
-
-nmcli connection up ZeroDegree

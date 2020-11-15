@@ -100,6 +100,7 @@
 .config/systemd/user/default.target.wants
 !.config/TabNine
 !.config/TabNine/**
+.config/TabNine/monitoring
 !.config/telegram
 !.config/telegram/**
 # https://code.launchpad.net/~gnome-terminator/terminator/manual-gtk3

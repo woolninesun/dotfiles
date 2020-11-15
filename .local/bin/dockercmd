@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# ###################################################
+# My Generic BASH script template
+#
+version="1.0.0" # Sets version variable
+#
+# HISTORY:
+#
+# * 2020.09.24 - v1.0.0  - First Creation
+#
+# ###################################################
+
+# Provide a variable with the location of this script.
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+############ Base Script template config ############
+hasTmpDir=0
+
+source "${scriptPath}/script-utils/setup.sh"
+source "${scriptPath}/script-utils/test.sh"
+
+# Set main script
+# -----------------------------------
+function mainScript() {
+############## Begin Script Here ###################
+
+cmd="${1}"
+if str.isNotEmpty "${cmd}"; then
+  excuteScript="${scriptPath}/_dockercmd/${cmd}"
+
+  if path.isExists "${excuteScript}" && path.isExecutable "${excuteScript}"; then
+    shift && ${scriptPath}/_dockercmd/${cmd} $@
+  else
+    echo "${cmd} : unknow command or command is not executable."
+  fi
+fi
+
+############### End Script Here ####################
+}
+
+# ############# ############# #############
+# ##       TIME TO RUN THE SCRIPT        ##
+# ############# ############# #############
+
+# Run your script
+mainScript ${@}

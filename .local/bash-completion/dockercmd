@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+___dockercmd_dive() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      2)
+        local args=(
+          "--no-trunc"
+          "--format {{.Repository}}\n{{.Repository}}:{{.Tag}}\n"
+          "--all"
+        )
+        COMPREPLY=(
+          $(compgen -W "$(docker image ls ${args[@]} | grep -v '<none>$')" -- "$cur")
+        )
+      ;;
+    esac
+}
+
+___dockercmd_packages() {
+    find \
+      -L /home/${USER}/.local/bin/_dockercmd \
+      -maxdepth 1 -type f -not -name '.*' -printf '%f\n'
+}
+
+___dockercmd() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    case $COMP_CWORD in
+      1)
+        compopt -o filenames &&
+        mapfile -t COMPREPLY < <(
+          IFS=$'\n'; compgen -W "$(___dockercmd_packages)" -- "$cur"
+        )
+      ;;
+      *)
+        case ${COMP_WORDS[1]} in
+          dive ) ___dockercmd_dive ;;
+        esac
+      ;;
+    esac
+}
+
+complete -F ___dockercmd dockercmd

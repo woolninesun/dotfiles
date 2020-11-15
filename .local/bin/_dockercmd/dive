@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+dockerImages='quay.io/wagoodman/dive'
+dockerTag='latest'
+
+dockerArgs=(
+  "--rm"
+  "-it"
+  "--volume /var/run/docker.sock:/var/run/docker.sock:ro"
+)
+
+echo "[docker] images: ${dockerImages}:${dockerTag}"
+echo "[docker]    cmd: docker run ${dockerArgs[@]} ${dockerImages}:${dockerTag}"
+
+docker run ${dockerArgs[@]} ${dockerImages}:${dockerTag} ${@}
